@@ -1,24 +1,35 @@
 const express = require('express') 
 const app = express()
 const cors = require('cors');
-var multer = require('multer');
-var upload = multer();
-require('dotenv/config');
+const store = require('./helpers/multer')
+const authJwt = require('./helpers/jwt');
 const mongoose = require('mongoose')
+require('dotenv/config');
+const errorhandler = require('./helpers/error-handler');
+
+
+
 app.use(cors())
 app.options('*',cors())
 
-
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(upload.array())
-app.use(express.static('./public/uploads'))
+app.use(authJwt())
+// app.use(store.array('files'))
 
-const userRoutes = require('./routes/users')
+app.use(express.static('./public/uploads'))
+app.use(errorhandler)
+
+const userRoutes = require('./routes/users');
+const coursesRoutes = require('./routes/courses');
+const categoryRoutes = require('./routes/categories');
+
 
 const api_url= process.env.API_URL
 
 app.use(`${api_url}/users`,userRoutes)
+app.use(`${api_url}/course`,coursesRoutes)
+app.use(`${api_url}/category`,categoryRoutes)
 
 
 
