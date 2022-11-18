@@ -23,6 +23,7 @@ app.use(errorhandler)
 const userRoutes = require('./routes/users');
 const coursesRoutes = require('./routes/courses');
 const categoryRoutes = require('./routes/categories');
+const progressRoutes = require('./routes/progress');
 
 
 const api_url= process.env.API_URL
@@ -30,6 +31,7 @@ const api_url= process.env.API_URL
 app.use(`${api_url}/users`,userRoutes)
 app.use(`${api_url}/course`,coursesRoutes)
 app.use(`${api_url}/category`,categoryRoutes)
+app.use(`${api_url}/progress`,progressRoutes)
 
 
 

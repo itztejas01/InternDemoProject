@@ -76,7 +76,7 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/signIn', async (req, res) => {
-    console.log('req.body',req.body);
+    // console.log('req.body',req.body);
     const { userName, password } = req.body
     const secret = process.env.JWT_SECRET
 
